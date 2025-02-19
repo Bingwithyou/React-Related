@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debounce Demo</title>
+  </head>
+  <body>
+    <input placeholder="请输入" type="'text'" id="input" />
+    <script>
+      let input = document.querySelector("#input");
+      // 延迟执行的函数
+      function callback(e) {
+        console.log(e.target.value);
+      }
+      // function debounce(func, delay) {
+      //   // 利用闭包的特性,保存timer变量
+      //   let timer = null;
+      //   return function () {
+      //     // 每次输入都会调用该函数，清除之前的定时器，重新开启定时器。
+      //     clearTimeout(timer);
+      //     timer = setTimeout(() => {
+      //       // 当delay时间内，不再输入内容,则执行该函数，打印出输入框的内容
+      //       func.apply(this, arguments);
+      //     }, delay);
+      //   };
+      // }
+      function debounce(func, delay) {
+         let timer = null;
+         return function(args){
+          clearTimeout(timer);
+          
+         }
+      }
+
+      let debounceFunc = debounce(callback, 1500);
+      // 给输入框绑定keyup事件,使用e.target.value获取到当前输入框的内容
+      input.addEventListener("keyup", function (e) {
+        debounceFunc(e);
+      });
+    </script>
+  </body>
+</html>

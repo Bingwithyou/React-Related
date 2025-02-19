@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>绝对定位与Transform 居中示例</title>
+    <style>
+      .container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background-color: #d0d0d0;
+      }
+      .box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* 平移50%，实现居中 */
+        width: 180px;
+        height: 180px;
+        background-color: #ff5722;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+      }
+      /* 
+      .container 设置为相对定位，使子元素 .box 的绝对定位基于它。
+      .box 通过 top: 50% 和 left: 50% 将左上角定位在父容器的中心，然后通过 transform: translate(-50%, -50%) 将自身平移至真正的中心位置。
+      */
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">居中</div>
+    </div>
+  </body>
+</html>

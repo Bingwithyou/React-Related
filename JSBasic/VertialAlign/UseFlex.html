@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Flexbox 居中示例</title>
+    <style>
+      .container {
+        display: flex;
+        justify-content: center; /* 水平居中 */
+        align-items: center; /* 垂直居中 */
+        height: 20vh; /* 父容器高度为视口高度 */
+        background-color: #f0f0f0;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: #4caf50;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">居中</div>
+    </div>
+  </body>
+</html>
