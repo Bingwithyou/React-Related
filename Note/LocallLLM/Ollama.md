@@ -41,7 +41,7 @@
 
 - **部署**：大模型在部署时可能会面临延迟和存储问题，因此在实际应用中选择合适的模型大小是关键。
 
-> 举例本地运行的 llama3.2(3b) 模型，提问其 9.9 与 9.11 哪个数字大时，回答是错误的
+> 举例本地运行的 llama3.2(3b) 模型，提问其 9.9 与 9.11 哪个数字大时，回答是错误的，在其他问题上提供的帮助也很有限
 
 ## 我的电脑可以部署多少参数的模型？
 
@@ -49,11 +49,13 @@
 
 配置详情参考文章：[配置详情](Requirments.md)
 
-## 开始准备工作
+## 本地部署准备工作
 
 本教程将使用 Orbstack(MacOS 的容器平台) ➕ Ollama (开源的大型语言模型平台) ➕ Open WebUI (大模型的图形化界面) 简单搭建一个本地大模型。
 
-### 安装 Ollama
+> 为什么我要使用 Orbstack 容器平台？参考文章：[Orbstack 性能优势](./FurtherReading/MacOS系统上Orbstack和Docker%20Desktop性能优势？.md)
+
+### 1. 安装 Ollama
 
 - [Ollama 官方下载](https://ollama.com)
 
@@ -65,25 +67,25 @@ $ ollama
 
 示例图：
 
-![ollama terminal](ollamaterminal.png)
+![ollama terminal](./images/ollamaterminal.png)
 
-### 下载拉取对应模型
+### 2. 下载拉取对应模型
 
 在 Ollama 官网中 Models 里列举了很多模型信息，可以根据需要选择，这里选择 DeepSeek-R1(8b) 为例：
 
-![deepseek8b](deepseek8b.png)
+![deepseek8b](./images/deepseek8b.png)
 
 复制运行命令到终端中运行：
 
-![pulldeepseek8b](pulldeepseek8b.png)
+![pulldeepseek8b](./images/pulldeepseek8b.png)
 
 可以看到已经开始了下载进程。进程结束后，本地就可以运行这个 AI 模型进行对话了：
 
-![exampleresponse](exampleresponse.png)
+![exampleresponse](./images/exampleresponse.png)
 
 但是终端里的内容并不方便查看，使用起来也比较繁琐，接下来我们尝试给他部署到 Open WebUI 中来实现图形化操作界面。
 
-### 安装容器平台
+### 3. 安装容器平台
 
 为了使用 Open WebUI，我们需要一个容器平台来运行他。这里我们使用的是 Mac 操作系统，以 Orbstack 作为容器平台。
 
@@ -95,9 +97,9 @@ Windows 系统可以选择 Docker-Desktop 平台。
 
 Orbstack 基本运行界面如图
 
-![Orbstack 操作界面](orbstackgui.png)
+![Orbstack 操作界面](./images/orbstackgui.png)
 
-### 安装 Open WebUI
+### 4. 安装 Open WebUI
 
 [Open WebUI GitHub 主页](https://github.com/open-webui/open-webui)
 
@@ -109,10 +111,10 @@ Orbstack 基本运行界面如图
 docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
 ```
 
-![installopenwebui](installopenwebui.png)
+![installopenwebui](./images/installopenwebui.png)
 
 终端运行命令后执行安装过程，大小大概 3GB：
-![OpenWebUIinstallTerminal](OpenWebUIinstallTerminal.png)
+![OpenWebUIinstallTerminal](./images/OpenWebUIinstallTerminal.png)
 
 ## 运行本地大模型
 
@@ -120,16 +122,36 @@ docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-
 
 1. 运行 Ollama，运行成功后 Mac 右上角会有应用图标展示；
 
-2. 运行 Open WebUI 容器：![runwebuicontainer](runwebuicontainer.png)
+2. 运行 Open WebUI 容器：![runwebuicontainer](./images/runwebuicontainer.png)
 
-3. 打开 Orbstack 选择 Open in Browser 浏览器打开 ![openinbrowser](openinbrowser.png)
+3. 打开 Orbstack 选择 Open in Browser 浏览器打开 ![openinbrowser](./images/openinbrowser.png)
 
-出现以下界面代表运行成功:![firstlogin](firstlogin.png)
-![firstlogin1](firstlogin1.png)
+出现以下界面代表运行成功:
+
+![firstlogin](./images/firstlogin.png)
+
+![firstlogin1](./images/firstlogin1.png)
+
 **初次配置的账号密码拥有管理员权限，请注意保存**
 
 ### 运行示例
 
-本地初次运行 DeepSeek-R1(8b) 模型时，询问 9.9 和 9.11 哪个数字大，回答是错误的，后来经过指正，之后再次询问都可以正确回答。
+![exampletest](./images/exampletest.png)
 
-![exampletest](exampletest.png)
+## FAQ
+
+### 我可以选择部署比如 Qwen 或者其他模型吗？
+
+可以，**开源**的大模型预言都可以进行本地部署，详细模型列表可参考：[Ollama 官方模型列表](https://ollama.com/search)
+
+### 我一定要安装像 Orbstack 这样的容器平台吗？
+
+如果要使用 Open WebUI，官方还提供了通过 Python 的安装方法，参考：[通过 Python 安装 Open WebUI](https://github.com/open-webui/open-webui?tab=readme-ov-file#installation-via-python-pip-)
+
+### 我不想使用 Open WebUI，有没有其他的平台可以使用？
+
+可以参考 Ollama 官方推荐的平台列表：[网页&桌面客户端集成](https://github.com/ollama/ollama?tab=readme-ov-file#web--desktop)
+
+### 模型部署后运行速度慢怎么办？
+
+检查计算机配置是否符合要求，本地部署的模型参数数量是否过高，升级电脑硬件配置。
